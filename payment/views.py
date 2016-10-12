@@ -30,11 +30,11 @@ def payment_process(request):
 		'item_name': 'Order {}'.format(order.id),
 		'invoice': str(order.id),
 		'currency_code': 'USD',
-		'notify_url': 'http://{}{}'.format(host, reverse('pappal-ipn')),
+		'notify_url': 'http://{}{}'.format(host, reverse('paypal-ipn')),
 		'return_url': 'http://{}{}'.format(host, reverse('payment:done')),
 		'cancel_return': 'http://{}{}'.format(host, reverse('payment:canceled')),
 	}
-	form  = PayPalPaymentsForm(init=paypal_dict)
+	form  = PayPalPaymentsForm(initial=paypal_dict)
 	return render(request, 'payment/process.html', {'order': order,
 													'form': form})
 
